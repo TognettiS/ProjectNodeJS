@@ -2,7 +2,8 @@
 
 Troque o Branch de Main para Master caso queira visualizar os arquivos.
 
-Programação utilizando NodeJS e Insomnia para enviar dados ao servidor local e obter resposta de acordo com os dados informados.
+Criei uma API Rest utilizando NodeJS e Insomnia para enviar dados ao servidor local e obter resposta de acordo com os dados informados, a resposta do servidor é em formato JSON.
+Caso queira utilizá-lo/testá-lo: é necessário baixar todos os arquivos e um programa para enviar os dados ao servidor pelo método POST.
 Este projeto consiste em:
 
 
