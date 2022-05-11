@@ -7,6 +7,9 @@ Este projeto consiste em:
 
 
 -Traduzir algarismos romanos em arábicos
+
 -Traduzir algarismos arábicos em romanos
+
 -Detectar caso não haja ocorrência de algarismos romanos
+
 -Detectar e traduzir o primeiro algarismo romano em uma sentença aleatória
