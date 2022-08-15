@@ -6,11 +6,8 @@ Criei uma API Rest utilizando NodeJS e Insomnia para enviar dados ao servidor lo
 Caso queira utilizá-lo/testá-lo: é necessário baixar todos os arquivos e um programa para enviar os dados ao servidor pelo método POST.
 Este projeto consiste em:
 
+-Detectar e traduzir todos os possíveis algarismos romanos em sentenças aleatórias.
 
--Traduzir algarismos romanos em arábicos
+-Detectar o maior algarismo romano e mostrar seu valor traduzido.
 
--Traduzir algarismos arábicos em romanos
-
--Detectar caso não haja ocorrência de algarismos romanos
-
--Detectar e traduzir o primeiro algarismo romano em uma sentença aleatória
+-Detectar caso não haja ocorrência de algarismos romanos.
