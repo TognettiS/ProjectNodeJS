@@ -2,61 +2,80 @@ const express = require("express");
 const app = express();
 const {romanToArab, arabToRoman, isValidArab, isValidRoman} = require('roman-numbers')
 
+var cadaletra, letrasromanas= "", numeros, numerosromanos, maiornumero, maiornumeroromano;
+
 app.use(express.json());
 
 app.get("/search", function(req, res){
-
 });
-
-
 
 app.post("/search", function functionName(req, res){
-  let {Texto} = req.body;
-  let i = 0;
-  let teste = Array.from(Texto);
+  var {texto} = req.body;
+  cadaletra = Array.from(texto);
 
+  ApenasNumerosRomanos();
+  SeparaNumerosRomanos();
+  LimpaVazio();
+  AchaMaiorNumero();
 
+  res.json({ maiornumero,
+             maiornumeroromano,
+             numerosromanos,
+             numeros
+  });
 
-  if (isValidRoman(Texto)) {
-      let Valor = romanToArab(Texto);
+  LimpaTodosValores();
+});
 
-      res.json({ Texto,
-                 Valor
-        });
+function ApenasNumerosRomanos() {
+  var i = 0;
+  for (var i = 0; i < cadaletra.length; i++) {
+    if (cadaletra[i] == "I" || cadaletra[i] == "V" || cadaletra[i] == "X" || cadaletra[i] == "L" || cadaletra[i] == "C" || cadaletra[i] == "D" || cadaletra[i] == "M") {
+      letrasromanas =  letrasromanas + cadaletra[i]
     }
+  }
+}
 
-  else if(teste.includes("I") || teste.includes("V")|| teste.includes("X") || teste.includes("L") || teste.includes("C") || teste.includes("D") || teste.includes("M") ){
-    for (i=0; i<=Texto.length; i++) {
-      if (teste[i] != 1) {
-        if(teste[i] == "I"|| teste[i] == "V" || teste[i] == "X" || teste[i] == "L" || teste[i] == "C" || teste[i] == "D" || teste [i] == "M"){
-          let Texto = [];
-          Texto[i] = teste[i];
-          let Valor = romanToArab(Texto[i]);
-          res.json({Texto,
-            Valor
-            });
-        }
+function SeparaNumerosRomanos(){
+    numerosromanos = new Array(letrasromanas.length)
+    numeros = new Array(letrasromanas.length)
+
+    for (var i = 0; i < letrasromanas.length; i++) {
+      numerosromanos[i] = letrasromanas.substr(0, letrasromanas.length-i)
+
+      if (isValidRoman(numerosromanos[i])) {
+        numeros[i] = romanToArab(numerosromanos[i])
+        letrasromanas = letrasromanas.replace(numerosromanos[i], '')
+        i = -1
+      }
+      else {
+        numerosromanos[i] = numerosromanos[i].replace(numerosromanos[i], '')
       }
     }
+}
+
+function LimpaVazio(){
+  numeros = numeros.filter((a) => a)
+  numerosromanos = numerosromanos.filter((a) => a)
+}
+
+function AchaMaiorNumero(){
+  for (var i = 0; i < numeros.length; i++) {
+    if (maiornumero > numeros[i]) {
+      continue
+    }
+    else {
+      maiornumero = numeros[i]
+    }
   }
+  maiornumeroromano = arabToRoman(maiornumero)
+}
 
-  else if (Texto > 0) {
-    let mudar = parseInt(Texto);
-    let Valor = arabToRoman(mudar);
-    res.json({Texto,
-      Valor
-      });
-
-  }
-
-  else {
-    res.json({Valor: "Não Há Algarismos Romanos"
-    })
-  }
-
-
-
-});
+function LimpaTodosValores() {
+  letrasromanas = ""
+  maiornumero = ""
+  maiornumeroromano =""
+}
 
 app.listen(3000, function() {
   console.log("Servidor está aberto!");
